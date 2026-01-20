@@ -1,201 +1,201 @@
-# 📝 文本格式转换器
+# 📝 Text Format Converter
 
-一个功能强大的文本格式转换工具，支持压缩文本自动分行和多行文本自动压缩，特别适用于账号信息、数据批量处理等场景。
+A powerful text format conversion tool that supports automatic line breaking for compressed text and automatic compression for multi-line text. Especially suitable for account information and batch data processing scenarios.
 
-## ✨ 主要功能
+## ✨ Key Features
 
-- 🔄 **双向转换**：压缩格式 ↔ 分行格式自由切换
-- 🎯 **多种分隔符**：支持 `|`、`---`、`:` 三种分隔符
-- 🧠 **智能标题识别**：自动检测标题字段，为每行数据添加标题
-- 📦 **批量处理**：支持一次性处理多条数据
-- 📁 **文件上传**：支持 TXT 文件上传和拖拽上传
-- 📊 **实时统计**：显示行数和字符数
-- 📋 **一键复制**：快速复制转换结果
-- ⌨️ **键盘快捷键**：提高操作效率
+- 🔄 **Bidirectional Conversion**: Switch freely between compressed format ↔ line-by-line format
+- 🎯 **Multiple Separators**: Supports `|`, `---`, and `:` separators
+- 🧠 **Smart Header Recognition**: Automatically detects header fields and adds titles to each line of data
+- 📦 **Batch Processing**: Process multiple records at once
+- 📁 **File Upload**: Supports TXT file upload and drag-and-drop
+- 📊 **Real-time Statistics**: Displays line count and character count
+- 📋 **One-click Copy**: Quickly copy conversion results
+- ⌨️ **Keyboard Shortcuts**: Improve operation efficiency
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-### 在线使用
+### Online Usage
 
-直接在浏览器中打开 `index.html` 文件即可使用，无需安装任何依赖。
+Simply open the `index.html` file in your browser. No installation required.
 
-### 本地运行
+### Local Setup
 
 ```bash
-# 克隆项目
+# Clone the repository
 git clone https://github.com/mouttth0705-ops/-.git
 
-# 打开项目文件夹
-cd 文本格式转换器
+# Navigate to project folder
+cd text-format-converter
 
-# 在浏览器中打开 index.html
+# Open index.html in your browser
 ```
 
-## 📖 使用说明
+## 📖 Usage Guide
 
-### 1️⃣ 转换为分行格式
+### 1️⃣ Convert to Line Format
 
-将使用分隔符分隔的压缩文本自动分行，每个部分独立一行。
+Convert compressed text separated by delimiters into individual lines.
 
-**输入示例：**
+**Input Example:**
 ```
 user1 | pass1 | email1@test.com
 user2 | pass2 | email2@test.com
 ```
 
-**设置标题（可选）：**
+**Set Headers (Optional):**
 ```
-用户名 | 密码 | 邮箱
-```
-
-**输出结果：**
-```
-用户名：user1
-密码：pass1
-邮箱：email1@test.com
-
-用户名：user2
-密码：pass2
-邮箱：email2@test.com
+Username | Password | Email
 ```
 
-### 2️⃣ 压缩为单行
-
-将多行文本压缩为单行，使用选定的分隔符连接。
-
-**输入示例：**
+**Output Result:**
 ```
-用户名
-密码
-邮箱
-```
+Username: user1
+Password: pass1
+Email: email1@test.com
 
-**输出结果：**
-```
-用户名 | 密码 | 邮箱
+Username: user2
+Password: pass2
+Email: email2@test.com
 ```
 
-### 3️⃣ 批量处理
+### 2️⃣ Compress to Single Line
 
-支持一次性输入多条数据，每行一条记录，自动批量转换。
+Compress multi-line text into a single line using the selected separator.
 
-**输入示例：**
+**Input Example:**
 ```
-用户名 | 密码 | 邮箱
+Username
+Password
+Email
+```
+
+**Output Result:**
+```
+Username | Password | Email
+```
+
+### 3️⃣ Batch Processing
+
+Support inputting multiple records at once, one record per line, automatically batch convert.
+
+**Input Example:**
+```
+Username | Password | Email
 user1 | pass1 | email1@test.com
 user2 | pass2 | email2@test.com
 user3 | pass3 | email3@test.com
 ```
 
-程序会自动识别第一行为标题，其余行为数据，批量转换后输出。
+The program will automatically recognize the first line as headers and the rest as data, then batch convert and output.
 
-### 4️⃣ 文件上传
+### 4️⃣ File Upload
 
-**方式一：点击上传**
-1. 点击"📁 上传TXT"按钮
-2. 选择 .txt 文件
-3. 文件内容自动加载到输入框
+**Method 1: Click Upload**
+1. Click the "📁 Upload TXT" button
+2. Select a .txt file
+3. File content will be automatically loaded into the input box
 
-**方式二：拖拽上传**
-1. 从文件管理器拖拽 .txt 文件
-2. 拖到输入文本框上方
-3. 松开鼠标自动上传
+**Method 2: Drag and Drop**
+1. Drag a .txt file from file explorer
+2. Drop it onto the input text box
+3. Release to automatically upload
 
-## 🎯 支持的格式
+## 🎯 Supported Formats
 
-### 输入格式
+### Input Formats
 
-1. **竖线分隔**：`xxxx | xxxx | xxx`
-2. **三横线分隔**：`xxxx---xxxx---xxxx`
-3. **冒号分隔**：`xxxx:xxxx:xxxx`
-4. **多行文本**：每行一个字段
+1. **Pipe Separator**: `xxxx | xxxx | xxx`
+2. **Triple Dash Separator**: `xxxx---xxxx---xxxx`
+3. **Colon Separator**: `xxxx:xxxx:xxxx`
+4. **Multi-line Text**: One field per line
 
-### 输出格式
+### Output Formats
 
-1. **分行格式**：每个字段独立一行
-2. **压缩格式**：使用分隔符连接成单行
+1. **Line Format**: Each field on a separate line
+2. **Compressed Format**: Connected with separators into a single line
 
-## ⌨️ 键盘快捷键
+## ⌨️ Keyboard Shortcuts
 
-- `Ctrl/Cmd + Enter`：转换为分行格式
-- `Ctrl/Cmd + Shift + Enter`：压缩为单行
+- `Ctrl/Cmd + Enter`: Convert to line format
+- `Ctrl/Cmd + Shift + Enter`: Compress to single line
 
-## 🌟 特色功能
+## 🌟 Special Features
 
-### 智能标题识别
+### Smart Header Recognition
 
-程序会自动检测文本中的标题行（包含多个用分隔符分隔的字段名），例如：
-
-```
-用户名 | 密码 | 2FA | 邮箱 | OAuth 令牌
-```
-
-当检测到标题时，可以选择在转换时为每行数据添加对应的标题：
+The program automatically detects header lines (containing multiple fields separated by delimiters), for example:
 
 ```
-用户名：value1
-密码：value2
-2FA：value3
-邮箱：value4
-OAuth 令牌：value5
+Username | Password | 2FA | Email | OAuth Token
 ```
 
-### 其他说明识别
-
-程序会智能识别并分离账号说明信息，将其归类到"其他说明"区域单独展示。
-
-### 批量数据处理
-
-支持一次性导入多条数据（用换行符分隔），批量转换并输出，记录之间用空行分隔。
-
-## 📁 文件结构
+When headers are detected, you can choose to add corresponding titles to each line of data:
 
 ```
-文本格式转换器/
-├── index.html      # 主HTML文件
-├── script.js       # JavaScript核心逻辑
-├── style.css       # CSS样式文件
-└── README.md       # 说明文档
+Username: value1
+Password: value2
+2FA: value3
+Email: value4
+OAuth Token: value5
 ```
 
-## 🔧 技术栈
+### Additional Notes Recognition
 
-- **HTML5**：页面结构
-- **CSS3**：样式和动画效果
-- **Vanilla JavaScript**：核心转换逻辑
+The program intelligently recognizes and separates account description information, classifying it into the "Other Notes" area for separate display.
 
-## 💡 使用场景
+### Batch Data Processing
 
-- 账号列表格式转换
-- 数据导入导出格式调整
-- 文本批量处理
-- 配置文件格式转换
-- CSV/TSV 数据格式化
+Supports importing multiple records at once (separated by line breaks), batch conversion and output, with blank lines separating different records.
 
-## 📝 注意事项
+## 📁 File Structure
 
-- 程序会自动过滤空行
-- 转换时会自动去除每行首尾的空白字符
-- 支持任意长度的文本处理
-- 文件上传限制：TXT格式，最大5MB
-- 支持UTF-8编码
+```
+text-format-converter/
+├── index.html      # Main HTML file
+├── script.js       # JavaScript core logic
+├── style.css       # CSS stylesheet
+└── README.md       # Documentation
+```
 
-## 🎨 界面特点
+## 🔧 Tech Stack
 
-- 现代化渐变色设计
-- 左右分栏布局，输出区域宽敞
-- 清晰的视觉反馈
-- 响应式设计，支持手机和电脑
-- 流畅的动画效果
+- **HTML5**: Page structure
+- **CSS3**: Styles and animation effects
+- **Vanilla JavaScript**: Core conversion logic
 
-## 🤝 贡献
+## 💡 Use Cases
 
-欢迎提出建议和改进意见！
+- Account list format conversion
+- Data import/export format adjustment
+- Bulk text processing
+- Configuration file format conversion
+- CSV/TSV data formatting
 
-## 📄 许可证
+## 📝 Notes
+
+- Program automatically filters empty lines
+- Automatically trims whitespace from the beginning and end of each line during conversion
+- Supports text processing of any length
+- File upload limit: TXT format, maximum 5MB
+- Supports UTF-8 encoding
+
+## 🎨 Interface Features
+
+- Modern gradient color design
+- Left-right split layout with spacious output area
+- Clear visual feedback
+- Responsive design, supports both mobile and desktop
+- Smooth animation effects
+
+## 🤝 Contributing
+
+Suggestions and improvements are welcome!
+
+## 📄 License
 
 MIT License
 
 ---
 
-**享受使用文本格式转换器！** 🎉
+**Enjoy using Text Format Converter!** 🎉
