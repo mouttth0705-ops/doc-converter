@@ -23,10 +23,10 @@ Simply open the `index.html` file in your browser. No installation required.
 
 ```bash
 # Clone the repository
-git clone https://github.com/mouttth0705-ops/-.git
+git clone https://github.com/mouttth0705-ops/doc-converter.git
 
 # Navigate to project folder
-cd text-format-converter
+cd doc-converter
 
 # Open index.html in your browser
 ```
