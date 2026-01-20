@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文本格式转换器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📝 文本格式转换器</h1>
+            <p class="subtitle">支持压缩文本自动分行和文本自动压缩</p>
+        </header>
+
+        <div class="main-content">
+            <!-- 左侧区域 -->
+            <div class="left-panel">
+                <!-- 输入区域 -->
+                <div class="input-section">
+                    <div class="section-header">
+                        <h2>输入文本</h2>
+                        <div class="header-actions-group">
+                            <button class="btn-upload" onclick="document.getElementById('fileInput').click()">
+                                📁 上传TXT
+                            </button>
+                            <button class="btn-clear" onclick="clearInput()">清空</button>
+                        </div>
+                    </div>
+                    <input type="file" id="fileInput" accept=".txt" style="display: none;" onchange="handleFileUpload(event)">
+                    <div class="textarea-wrapper" id="dropZone">
+                        <textarea 
+                            id="inputText" 
+                            placeholder="请输入文本...&#10;&#10;支持的格式：&#10;1. xxxx | xxxx | xxx&#10;2. xxxx---xxxx---xxxx&#10;3. xxxx:xxxx:xxxx&#10;&#10;💡 批量导入：每行一条数据&#10;📁 支持拖拽 .txt 文件到此处"
+                            rows="12"
+                        ></textarea>
+                        <div class="drop-overlay" id="dropOverlay">
+                            <div class="drop-message">
+                                <span class="drop-icon">📁</span>
+                                <p>松开鼠标上传文件</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-format-info">
+                        <span class="info-label">支持的分隔符：</span>
+                        <span class="format-tag">|</span>
+                        <span class="format-tag">---</span>
+                        <span class="format-tag">:</span>
+                    </div>
+                </div>
+
+                <!-- 标题输入区域 -->
+                <div class="header-input-section">
+                    <div class="header-section-title">
+                        <span class="title-icon">🏷️</span>
+                        <h3>分行标题</h3>
+                        <button class="btn-detect" onclick="autoDetectHeaders()">
+                            <span class="detect-icon">🔍</span>
+                        </button>
+                    </div>
+                <input 
+                    type="text" 
+                    id="headerInput" 
+                    placeholder="示例：用户名 | 密码 | 2FA | 邮箱"
+                    class="header-input"
+                />
+                    <div class="header-actions">
+                        <span class="header-count" id="headerCount">未设置</span>
+                        <button class="btn-small btn-clear-header" onclick="clearHeaders()">清空</button>
+                    </div>
+                </div>
+
+                <!-- 其他说明区域 -->
+                <div class="notes-section" id="notesSection" style="display: none;">
+                    <div class="notes-header">
+                        <span class="notes-icon">📋</span>
+                        <h4>其他说明</h4>
+                        <button class="btn-toggle-notes" onclick="toggleNotes()">
+                            <span id="toggleIcon">▼</span>
+                        </button>
+                    </div>
+                    <div class="notes-content" id="notesContent">
+                        <div class="notes-text" id="notesText"></div>
+                    </div>
+                </div>
+
+                <!-- 控制按钮 -->
+                <div class="control-section">
+                    <div class="button-group">
+                        <button class="btn-primary" onclick="convertToLines()">
+                            <span class="btn-icon">⬇️</span>
+                            转换为分行
+                        </button>
+                        <div class="compress-button-wrapper">
+                            <button class="btn-secondary btn-compress-main" onclick="convertToCompressed()">
+                                <span class="btn-icon">⬆️</span>
+                                <span>压缩</span>
+                            </button>
+                            <button class="btn-compress-dropdown" onclick="toggleSeparatorMenu(event)">
+                                <span class="dropdown-arrow">▼</span>
+                            </button>
+                            <div id="separatorMenu" class="separator-menu">
+                                <div class="separator-option" onclick="selectSeparator('|')">
+                                    <span class="separator-symbol">|</span>
+                                    <span class="separator-name">竖线</span>
+                                </div>
+                                <div class="separator-option" onclick="selectSeparator('---')">
+                                    <span class="separator-symbol">---</span>
+                                    <span class="separator-name">三横线</span>
+                                </div>
+                                <div class="separator-option" onclick="selectSeparator(':')">
+                                    <span class="separator-symbol">:</span>
+                                    <span class="separator-name">冒号</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧输出区域 -->
+            <div class="right-panel">
+                <div class="output-section">
+                    <div class="section-header">
+                        <h2>输出结果</h2>
+                        <button class="btn-copy" onclick="copyOutput()">复制</button>
+                    </div>
+                    <textarea 
+                        id="outputText" 
+                        class="output-textarea"
+                        placeholder="转换结果将显示在这里..."
+                        readonly
+                    ></textarea>
+                    <div class="output-info">
+                        <span id="lineCount">行数: 0</span>
+                        <span id="charCount">字符数: 0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 使用说明 -->
+        <div class="instructions">
+            <h3>📖 使用说明</h3>
+            <div class="instruction-grid">
+                <div class="instruction-item">
+                    <div class="instruction-number">1</div>
+                    <div class="instruction-content">
+                        <h4>转换为分行格式</h4>
+                        <p>将使用 | 或 --- 分隔的压缩文本自动分行，每个部分独立一行。支持智能识别标题字段，自动添加到每行开头。支持批量处理，每行一条数据</p>
+                    </div>
+                </div>
+                <div class="instruction-item">
+                    <div class="instruction-number">2</div>
+                    <div class="instruction-content">
+                        <h4>压缩为单行</h4>
+                        <p>将多行文本压缩为单行，使用选定的分隔符连接</p>
+                    </div>
+                </div>
+                <div class="instruction-item">
+                    <div class="instruction-number">3</div>
+                    <div class="instruction-content">
+                        <h4>自动检测</h4>
+                        <p>程序会自动检测输入文本的格式并进行相应处理</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2026 文本格式转换器 | 简单高效的文本处理工具</p>
+        </footer>
+    </div>
+
+    <!-- 提示消息 -->
+    <div id="toast" class="toast"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
